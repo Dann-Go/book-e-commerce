@@ -93,6 +93,7 @@ func Inject() *gin.Engine {
 	})
 
 	router.Use(middleware.Logger())
+	router.Use(middleware.CORS())
 
 	return router
 }
