@@ -13,12 +13,20 @@ func (h *Handler) signUp(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, responses.NewServerBadRequestError(err.Error()))
 		return
 	}
+	simplePassword := json.PasswordHash
 	err := h.services.CreateUser(&json)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
 		return
 	}
-	c.JSON(http.StatusOK, responses.NewServerGoodResponse("User was added"))
+
+	token, err := h.services.GenerateToken(json.Login, simplePassword)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
+		return
+	}
+
+	c.JSON(http.StatusOK, responses.NewServerGoodResponse("User was added '\n' token:"+token))
 }
 
 type signInInput struct {
