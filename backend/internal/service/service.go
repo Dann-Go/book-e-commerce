@@ -13,7 +13,12 @@ type Authorization interface {
 }
 
 type Books interface {
-	CreateBook(book *domain.Book) error
+	CreateBook(book *domain.Book, userId int) error
+	GetAllBooks() ([]domain.Book, error)
+	GetAllBooksByOwnerId(id int) ([]domain.Book, error)
+	UpdateBookById(book *domain.Book, id int) error
+	GetBookById(id int) (*domain.Book, error)
+	DeleteBookById(id int) error
 }
 
 type Service struct {
@@ -24,5 +29,6 @@ type Service struct {
 func NewService(r *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(r.Authorization),
+		Books:         NewBooksService(r.Books),
 	}
 }

@@ -31,6 +31,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			books.GET("/:id", h.getBookById)
 			books.PUT("/:id", h.updateBookById)
 			books.DELETE("/:id", h.DeleteBookById)
+			books.GET("/user-books", h.getBookByUserId)
 		}
 	}
 

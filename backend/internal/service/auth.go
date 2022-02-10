@@ -23,6 +23,12 @@ type AuthService struct {
 	repo repository.Authorization
 }
 
+func (s *AuthService) CreateUser(user *domain.User) (*domain.User, error) {
+	user.PasswordHash = hashPassword(user.PasswordHash)
+
+	return s.repo.CreateUser(user)
+}
+
 func (s *AuthService) GenerateToken(username, password string) (string, error) {
 	user, err := s.repo.GetUser(username)
 	if err != nil {
@@ -42,12 +48,6 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 	})
 
 	return token.SignedString([]byte(signingKey))
-}
-
-func (s *AuthService) CreateUser(user *domain.User) (*domain.User, error) {
-	user.PasswordHash = hashPassword(user.PasswordHash)
-
-	return s.repo.CreateUser(user)
 }
 
 func (s *AuthService) GetUserByUsername(username string) (*domain.User, error) {
