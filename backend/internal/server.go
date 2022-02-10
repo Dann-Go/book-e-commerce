@@ -82,7 +82,7 @@ func Inject() *gin.Engine {
 	//	log.Fatal(err.Error())
 	//}
 
-	repos := repository.NewRepository()
+	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 
