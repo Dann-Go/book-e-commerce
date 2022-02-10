@@ -33,6 +33,12 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			books.DELETE("/:id", h.DeleteBookById)
 			books.GET("/user-books", h.getBookByUserId)
 		}
+
+		orders := api.Group("/orders")
+		{
+			orders.POST("/", h.MakeOrder)
+			orders.PUT("/:id", h.UpdateOrder)
+		}
 	}
 
 	return router
