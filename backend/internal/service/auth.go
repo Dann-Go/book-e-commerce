@@ -44,16 +44,39 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 	return token.SignedString([]byte(signingKey))
 }
 
-func (s *AuthService) CreateUser(user *domain.User) error {
+func (s *AuthService) CreateUser(user *domain.User) (*domain.User, error) {
 	user.PasswordHash = hashPassword(user.PasswordHash)
 
 	return s.repo.CreateUser(user)
 }
 
-//$2a$14$UiGyRNbt6GMixbo3P6I2J.mz.1TSsYsx24lo.U70p5iH0s3jdW3GW
-//func (s *AuthService) GetUsers() ([]domain.User, error) {
-//	return s.repo.GetUsers(), nil
-//}
+func (s *AuthService) GetUserByUsername(username string) (*domain.User, error) {
+	user, err := s.repo.GetUser(username)
+	if err != nil {
+		return nil, err
+	}
+
+	return user, err
+}
+
+func (s *AuthService) ParseToken(accsessToken string) (int, error) {
+	token, err := jwt.ParseWithClaims(accsessToken, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, errors.New("invalid signing method")
+		}
+		return []byte(signingKey), nil
+	})
+	if err != nil {
+		return 0, err
+	}
+
+	claims, ok := token.Claims.(*tokenClaims)
+	if !ok {
+		return 0, errors.New("token claims are not of type *tokenClaims")
+	}
+
+	return claims.UserId, err
+}
 
 func NewAuthService(repo repository.Authorization) *AuthService {
 	return &AuthService{repo: repo}

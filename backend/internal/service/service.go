@@ -6,12 +6,14 @@ import (
 )
 
 type Authorization interface {
-	CreateUser(user *domain.User) error
+	CreateUser(user *domain.User) (*domain.User, error)
 	GenerateToken(username, password string) (string, error)
-	//GetUsers() ([]domain.User, error)
+	GetUserByUsername(username string) (*domain.User, error)
+	ParseToken(token string) (int, error)
 }
 
 type Books interface {
+	CreateBook(book *domain.Book) error
 }
 
 type Service struct {

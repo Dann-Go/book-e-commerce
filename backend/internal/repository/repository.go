@@ -6,7 +6,7 @@ import (
 )
 
 type Authorization interface {
-	CreateUser(user *domain.User) error
+	CreateUser(user *domain.User) (*domain.User, error)
 	GetUser(username string) (*domain.User, error)
 }
 

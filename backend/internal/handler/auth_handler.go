@@ -14,7 +14,7 @@ func (h *Handler) signUp(c *gin.Context) {
 		return
 	}
 	simplePassword := json.PasswordHash
-	err := h.services.CreateUser(&json)
+	user, err := h.services.CreateUser(&json)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
 		return
@@ -26,7 +26,10 @@ func (h *Handler) signUp(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, responses.NewServerGoodResponse("User was added '\n' token:"+token))
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"user":  user,
+		"token": token,
+	})
 }
 
 type signInInput struct {
@@ -46,6 +49,12 @@ func (h *Handler) signIn(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, responses.NewServerGoodResponse(token))
+	user, err := h.services.GetUserByUsername(json.Login)
+	user.PasswordHash = ""
+
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"user":  user,
+		"token": token,
+	})
 
 }

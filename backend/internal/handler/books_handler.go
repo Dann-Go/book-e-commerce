@@ -1,9 +1,13 @@
 package handler
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"net/http"
+)
 
 func (h *Handler) createBook(c *gin.Context) {
-
+	id, _ := c.Get("userId")
+	c.JSON(http.StatusOK, id)
 }
 
 func (h *Handler) getAllBooks(c *gin.Context) {
