@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/braintree/manners v0.0.0-20160418043613-82a8879fc5fd
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.7
 	github.com/jmoiron/sqlx v1.3.4
 	github.com/lib/pq v1.10.2
