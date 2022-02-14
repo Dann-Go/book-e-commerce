@@ -19,21 +19,14 @@ type Books interface {
 	DeleteBookById(id int) error
 }
 
-type Order interface {
-	CreateOrder(order *domain.Order, userId int) error
-	UpdateOrderById(order *domain.Order, id int) error
-}
-
 type Repository struct {
 	Authorization
 	Books
-	Order
 }
 
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Authorization: NewAuthPostgres(db),
 		Books:         NewBooksRepository(db),
-		Order:         NewOrderRepository(db),
 	}
 }
