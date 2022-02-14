@@ -10,19 +10,19 @@ import (
 func (h *Handler) signUp(c *gin.Context) {
 	json := domain.User{}
 	if err := c.ShouldBindJSON(&json); err != nil {
-		c.JSON(http.StatusBadRequest, responses.NewServerBadRequestError(err.Error()))
+		c.AbortWithStatusJSON(http.StatusBadRequest, responses.NewServerBadRequestError(err.Error()))
 		return
 	}
 	simplePassword := json.PasswordHash
 	user, err := h.services.CreateUser(&json)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
+		c.AbortWithStatusJSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
 		return
 	}
 
 	token, err := h.services.GenerateToken(json.Login, simplePassword)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
+		c.AbortWithStatusJSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
 		return
 	}
 
@@ -40,12 +40,12 @@ type signInInput struct {
 func (h *Handler) signIn(c *gin.Context) {
 	json := signInInput{}
 	if err := c.ShouldBindJSON(&json); err != nil {
-		c.JSON(http.StatusUnauthorized, responses.NewServerUnauthorizedResponse(err.Error()))
+		c.AbortWithStatusJSON(http.StatusUnauthorized, responses.NewServerUnauthorizedResponse(err.Error()))
 		return
 	}
 	token, err := h.services.GenerateToken(json.Login, json.PasswordHash)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
+		c.AbortWithStatusJSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
 		return
 	}
 

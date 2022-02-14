@@ -11,7 +11,7 @@ import (
 func (h *Handler) MakeOrder(c *gin.Context) {
 	json := domain.Order{}
 	if err := c.ShouldBindJSON(&json); err != nil {
-		c.JSON(http.StatusBadRequest, responses.NewServerBadRequestError(err.Error()))
+		c.AbortWithStatusJSON(http.StatusBadRequest, responses.NewServerBadRequestError(err.Error()))
 		return
 	}
 
@@ -19,7 +19,7 @@ func (h *Handler) MakeOrder(c *gin.Context) {
 
 	err := h.services.Order.CreateOrder(&json, userId.(int))
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
+		c.AbortWithStatusJSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
 		return
 	}
 
@@ -31,13 +31,13 @@ func (h *Handler) UpdateOrder(c *gin.Context) {
 
 	json := domain.Order{}
 	if err := c.ShouldBindJSON(&json); err != nil {
-		c.JSON(http.StatusBadRequest, responses.NewServerBadRequestError(err.Error()))
+		c.AbortWithStatusJSON(http.StatusBadRequest, responses.NewServerBadRequestError(err.Error()))
 		return
 	}
 
 	err := h.services.Order.UpdateOrderById(&json, id)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
+		c.AbortWithStatusJSON(http.StatusInternalServerError, responses.NewServerInternalError(err.Error()))
 		return
 	}
 

@@ -6,7 +6,6 @@ import (
 	"github.com/Dann-Go/book-e-commerce/backend/internal/repository"
 	"github.com/Dann-Go/book-e-commerce/backend/internal/service"
 	"github.com/Dann-Go/book-e-commerce/backend/pkg/middleware"
-	"github.com/braintree/manners"
 	"github.com/gin-gonic/gin"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
@@ -18,7 +17,7 @@ import (
 )
 
 type Server struct {
-	server *manners.GracefulServer
+	server *http.Server
 }
 
 type DbPostgresConfig struct {
@@ -90,6 +89,7 @@ func Inject() *gin.Engine {
 
 	router.Group("/").GET("/health", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{"status": "alive"})
+		return
 	})
 
 	router.Use(middleware.Logger())
@@ -103,13 +103,13 @@ func (s *Server) Run(port string) error {
 	envsCheck()
 
 	router := Inject()
-	s.server = manners.NewWithServer(&http.Server{
+	s.server = &http.Server{
 		Addr:           ":" + port,
 		Handler:        router,
 		ReadTimeout:    30 * time.Second,
 		WriteTimeout:   30 * time.Second,
 		MaxHeaderBytes: 1 << 20,
-	})
+	}
 	return s.server.ListenAndServe()
 }
 
