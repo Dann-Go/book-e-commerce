@@ -18,11 +18,22 @@ export const authApi = createApi(
                         body: creds
                     })
                 }
-            })
+            }),
+            signIn: build.mutation({
+                query: (creds) => {
+                    console.log(creds)
+                    return ({
+                        url: 'auth/sign-up',
+                        method: 'POST',
+                        body: creds
+                    })
+                }
+            }),
+
         })
 
     }
 )
 
 
-export const {useSignUpMutation} = authApi
+export const {useSignUpMutation, useSignInMutation} = authApi
