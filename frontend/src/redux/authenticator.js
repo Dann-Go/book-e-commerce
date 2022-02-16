@@ -23,7 +23,7 @@ export const authApi = createApi(
                 query: (creds) => {
                     console.log(creds)
                     return ({
-                        url: 'auth/sign-up',
+                        url: 'auth/sign-in',
                         method: 'POST',
                         body: creds
                     })

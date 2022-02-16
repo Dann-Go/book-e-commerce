@@ -2,6 +2,7 @@ import * as authenticator from "../../../redux/authenticator";
 import TokenStorage from "../../../utils/storage/TokenStorage";
 import UserStorage from "../../../utils/storage/UserStorage";
 import {useState} from "react";
+import './signUpForm.css'
 
 
 const SignUpForm = () => {
