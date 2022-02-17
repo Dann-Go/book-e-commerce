@@ -5,6 +5,7 @@ import SignInPage from "./pages/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import NavBar from "./components/navbar/NavBar";
 import {HomePage} from "./pages/HomePage/HomePage";
+import {OwnedBookPage} from "./pages/OwnedBookPage/OwnedBookPage";
 
 function App() {
     return (
@@ -14,7 +15,7 @@ function App() {
                 <Route path={RouterPaths.SIGN_IN} element={<SignInPage/>}/>
                 <Route path={RouterPaths.SIGN_UP} element={<SignUpPage/>}/>
                 <Route path={RouterPaths.HOME} element={<HomePage/>}/>
-                <Route path={RouterPaths.FAVORITE_BOOKS} element={null}/>
+                <Route path={RouterPaths.OWNED_BOOKS} element={<OwnedBookPage/>}/>
             </Routes>
         </Router>
     );

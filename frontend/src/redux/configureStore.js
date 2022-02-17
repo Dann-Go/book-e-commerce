@@ -8,4 +8,8 @@ export const store = configureStore({
         [bookApi.reducerPath]: bookApi.reducer,
     },
     middleware: getDefaultMiddleware => [...getDefaultMiddleware(), authApi.middleware, bookApi.middleware]
+
+
+    //TODO
+    //Auth State
 })

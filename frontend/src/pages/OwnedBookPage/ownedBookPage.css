@@ -1,0 +1,8 @@
+.ownedBook{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 75px;
+}

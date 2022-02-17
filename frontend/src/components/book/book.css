@@ -1,7 +1,7 @@
 .book{
     display: flex;
     flex-direction: column;
-    width: 450px;
+    width: 400px;
     background-color: lightblue;
     margin-top: 20px;
     border-radius: 15px;
