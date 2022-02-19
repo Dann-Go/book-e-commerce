@@ -1,4 +1,4 @@
-.book{
+.book {
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -9,14 +9,14 @@
     margin-right: 20px;
 }
 
-.book__header{
+.book__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
 }
 
-.book__title{
+.book__title {
     font-family: sans-serif;
     font-size: 18px;
     font-weight: bold;
@@ -35,16 +35,16 @@
 }
 
 
-
-.book__button{
+.book__button {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
 }
 
-.addToCartBtn{
+.addToCartBtn {
+    margin-top: 20px;
     width: 150px;
     height: 40px;
     padding: 10px 25px;
@@ -56,6 +56,8 @@
     transition: all 0.3s ease;
     position: relative;
     display: inline-block;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 .animated-btn {
@@ -81,7 +83,7 @@
 }
 
 
-.animated-btn:hover:after{
+.animated-btn:hover:after {
     left: 0;
     width: 100%;
 }
@@ -90,3 +92,53 @@
     top: 2px;
 }
 
+.editLink {
+    text-decoration: none;
+}
+
+.editLink img {
+    width: 45px;
+    height: 45px;
+}
+
+.optionBtns {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.amount__options {
+    margin-top: 20px;
+}
+
+.amount__options button {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    margin: 0 15px;
+    border-radius: 50%;
+    font-size: 2em;
+    background-color: green;
+    text-align: center;
+    border: transparent;
+    cursor: pointer;
+}
+
+.amount {
+    font-size: 20px;
+    font-weight: bold;
+}
+.book__remove{
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.book__remove img{
+    width: 20px;
+    height: 20px;
+    margin-left: auto;
+}

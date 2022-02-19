@@ -42,10 +42,20 @@ export const bookApi = createApi({
                 invalidatesTags: ['Books', 'OwnedBooks'],
             }),
             updateBookById: build.mutation({
-                query(body,id) {
+                query(body) {
                     return ({
-                        url: `api/books/${id}`,
-                        method: 'UPDATE',
+                        url: `api/books/${body.id}`,
+                        method: 'PUT',
+                        body: body.body,
+                    })
+                },
+                invalidatesTags: ['Books', 'OwnedBooks'],
+            }),
+            createBook: build.mutation({
+                query(body) {
+                    return ({
+                        url: `api/books/p`,
+                        method: 'POST',
                         body: body,
                     })
                 },
@@ -56,4 +66,7 @@ export const bookApi = createApi({
 
 })
 
-export const {useGetAllBooksQuery, useGetAllUserBooksQuery, useDeleteBookByIdMutation, useUpdateBookByIdMutation} = bookApi
+export const {
+    useGetAllBooksQuery, useGetAllUserBooksQuery, useDeleteBookByIdMutation,
+    useUpdateBookByIdMutation, useCreateBookMutation
+} = bookApi
