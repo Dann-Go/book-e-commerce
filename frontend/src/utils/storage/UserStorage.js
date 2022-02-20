@@ -6,7 +6,7 @@ class UserStorage {
     }
 
     static getUser() {
-        const value = localStorage.getItem(StorageKeys.USER) || {};
+        const value = JSON.stringify(localStorage.getItem(StorageKeys.USER)) || {};
         return JSON.parse(value);
     }
 

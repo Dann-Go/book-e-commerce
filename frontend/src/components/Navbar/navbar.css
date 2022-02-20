@@ -1,14 +1,21 @@
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     background-color: #333;
-    position: fixed; /* Set the navbar to fixed position */
     z-index: 50;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%; /* Full width */
+    padding: 0 30px;
+}
+
+.navbar__group{
+    display: flex;
     justify-content: center;
     align-items: center;
-    top: 0; /* Position the navbar at the top of the page */
-    right: 0;
-    left: 0;
-    width: 100%; /* Full width */
 }
 
 .navbar select {
@@ -22,7 +29,7 @@
 }
 
 
-/* Links inside the navbar */
+/* Links inside the Navbar */
 .navbar a {
     display: block;
     color: #f2f2f2;
@@ -36,3 +43,4 @@
     background: #ddd;
     color: black;
 }
+

@@ -11,7 +11,6 @@ export const authApi = createApi(
         endpoints: (build) => ({
             signUp: build.mutation({
                 query: (creds) => {
-                    console.log(creds)
                     return ({
                         url: 'auth/sign-up',
                         method: 'POST',
@@ -21,7 +20,6 @@ export const authApi = createApi(
             }),
             signIn: build.mutation({
                 query: (creds) => {
-                    console.log(creds)
                     return ({
                         url: 'auth/sign-in',
                         method: 'POST',

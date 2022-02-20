@@ -33,7 +33,6 @@ export const Book = (book) => {
     }
 
     const increaseAmount = () => {
-        console.log(book.amount)
         if (book.amount < book.book.amount) {
             dispatch(increaseBookAmount(book.book.id));
         }
@@ -46,29 +45,29 @@ export const Book = (book) => {
     }
     return (
         <div className="book">
-            <div className="book__remove">
-                <img className="remove-icon" src={removeIcon} onClick={handleRemove}/>
-            </div>
             <div className="book__header">
-                <div className="book__title">
-                    Title: {title}
-                </div>
                 <img src={image}/>
+                <div className="book__title">
+                   {title}
+                </div>
+                {book.isInCart ? <div className="book__remove">
+                    <img className="remove-icon" src={removeIcon} onClick={handleRemove}/>
+                </div>: null}
             </div>
-            <div className="book__authors">
-                Authors: {authors}
+            <div className="book__text">
+                <b>Authors:</b> {authors}
             </div>
-            <div className="book__year">
-                Publishing year: {year.toString().substring(0, 4)}
+            <div className="book__text">
+                <b>Publishing year:</b> {year.toString().substring(0, 4)}
             </div>
-            <div className="book__price">
-                Price: {`${price} $`}
+            <div className="book__text">
+                <b>Price:</b> {`${price} $`}
             </div>
-            <div className="book__amount">
-                Amount: {`${amount} left`}
+            <div className="book__text">
+                <b>Amount:</b> {amount > 0 ? `${amount} left`: 'out of stock'}
             </div>
             <div className="book__button">
-                {!book.isInCart ?
+                {!book.isInCart && amount > 0?
                     <button className="addToCartBtn animated-btn" onClick={handleAdd}> Add to cart</button> : null}
                 {book.isOwned ? <div className="optionBtns">
                     <button className="deleteBtn" onClick={handleDelete}> Delete</button>

@@ -4,6 +4,8 @@ import {bookApi} from "./bookFetcher";
 import editorReducer from "./editBookSlice"
 import cartReducer from "./cartSlice"
 import {orderApi} from "./orderApi";
+import authReducer, {signIn} from "./authSlice"
+import UserStorage from "../utils/storage/UserStorage";
 
 export const store = configureStore({
     reducer: {
@@ -12,11 +14,13 @@ export const store = configureStore({
         [orderApi.reducerPath]: orderApi.reducer,
         editor: editorReducer,
         cart: cartReducer,
+        auth: authReducer,
     },
     middleware: getDefaultMiddleware => [...getDefaultMiddleware(), authApi.middleware,
         bookApi.middleware, orderApi.middleware]
 
-
-    //TODO
-    //Auth State
 })
+
+if (UserStorage.getUser()){
+    store.dispatch(signIn());
+}
