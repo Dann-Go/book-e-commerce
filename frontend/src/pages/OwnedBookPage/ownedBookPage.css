@@ -1,0 +1,31 @@
+
+.ownedBook {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.createBookLink {
+    display: block;
+    position: fixed;
+    top: 87%;
+    right: 50px;
+    width: 75px;
+    height: 75px;
+    border-radius: 75px;
+    background-color: green;
+    text-align: center;
+    text-decoration: none;
+    text-align-all: center;
+    font-size: 3em;
+    line-height: 63px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+.createBookLink:hover {
+    background: yellow;
+    color: black;
+}
